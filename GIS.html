@@ -1,1046 +1,291 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-  <head>
-    <title>CampsBase</title>
-	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	
-	
-	
-	
-	<style type="text/css"> 
-	   
-	   .search-menu {
-		position: fixed; 
-		left: 5%; /* Сдвиг слоя влево */
-		top: 5%; /* Смещение слоя вниз */
-		width: 80%; /* Ширина слоя */
-		background: #60D6A7; /* Цвет фона */
-		padding: 5px; /* Поля вокруг */
-		padding-top: 5px; /* Значение поля сверху */
-		padding-bottom: 5px;
-		padding-right: 5px;
-		padding-left: 5px;
-	   }
-	   
-	   .map-container {
-		position: absolute; 
-		top: 15%; /* Смещение слоя вниз */
-		left: 15%;
-		padding: 0px; /* Поля вокруг */
-		padding-top: 0px; /* Значение поля сверху */
-		padding-bottom: 0px;
-		padding-right: 0px;
-		padding-left: 0px;
-	   }
-	   
-	   .left-info{
-		position: fixed;
-		width: 300px;
-		left: 2.5%; /* Сдвиг слоя влево */
-		top: 20%; /* Смещение слоя вниз */
-		background: #60D6A0; /* Цвет фона */
-		padding: 5px; /* Поля вокруг */
-		padding-top: 5px; /* Значение поля сверху */
-		padding-bottom: 5px;
-		padding-right: 5px;
-		padding-left: 5px;		
-	   }
-	   
-	   .way-info{
-		
-	   }
-	   
-	   .locations-info{
-	   
-	   
-	   }
-	   .one-organization-info{
-	   
-	   }
-	   
-	   .window-center-point{
-	   
-	   }
-	   
-	   h2{
-		align : center;
-	   }
-	   .one-addresse-info{
-		background-color : white;
-	   }
 
-	   .add-points-btn{
-		position: fixed; 
-		top: 0%; 
-		right: 0;
-	   }
+<head>
+	<title>CampsBase</title>
 
-	   .admin-button{
-		   position: fixed;
-		   top: 0%;
-		   right: 0%
-	   }
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+	    crossorigin="anonymous">
+
+
+	<style type="text/css">
+		.search-menu {
+			position: fixed;
+			left: 5%;
+			/* Сдвиг слоя влево */
+			top: 5%;
+			/* Смещение слоя вниз */
+			width: 80%;
+			/* Ширина слоя */
+			background: #60D6A7;
+			/* Цвет фона */
+			padding: 5px;
+			/* Поля вокруг */
+			padding-top: 5px;
+			/* Значение поля сверху */
+			padding-bottom: 5px;
+			padding-right: 5px;
+			padding-left: 5px;
+		}
+
+		.map-container {
+			position: absolute;
+			top: 15%;
+			/* Смещение слоя вниз */
+			left: 15%;
+			padding: 0px;
+			/* Поля вокруг */
+			padding-top: 0px;
+			/* Значение поля сверху */
+			padding-bottom: 0px;
+			padding-right: 0px;
+			padding-left: 0px;
+		}
+
+		.left-info {
+			position: fixed;
+			width: 300px;
+			left: 2.5%;
+			/* Сдвиг слоя влево */
+			top: 20%;
+			/* Смещение слоя вниз */
+			background: #60D6A0;
+			/* Цвет фона */
+			padding: 5px;
+			/* Поля вокруг */
+			padding-top: 5px;
+			/* Значение поля сверху */
+			padding-bottom: 5px;
+			padding-right: 5px;
+			padding-left: 5px;
+		}
+
+		.way-info {}
+
+		.locations-info {}
+
+		.one-organization-info {}
+
+		.window-center-point {}
+
+		h2 {
+			align: center;
+		}
+
+		.one-addresse-info {
+			background-color: white;
+		}
+
+		.add-points-btn {
+			position: fixed;
+			top: 0%;
+			right: 0;
+		}
+
+		.admin-button {
+			position: fixed;
+			top: 0%;
+			right: 0%
+		}
+
+		.exist-point {
+			position: absolute;
+			height: 24px;
+			width: 24px;
+		}
 	</style>
-		
-	
-	
-  </head>
+</head>
 
-  <body>
-	<!--
-	<div class = "map-container">
-		<img src="./map.png" id ="map-image">
-		</img>
-	</div>
-	
-	<div class = "map-container">
-		<canvas id = "map-canvas">
-		</canvas>
-	</div>
-	<div class = "map-container">
-		<div id = "map-icons">
-		</div>
-	</div>
-	-->
-	<div class = "map-container" id = "map-container">
-		<img src="./map.png" class = "map-container" id ="map-image">
-		</img>
-		<canvas class = "map-container" id = "map-canvas">
-		</canvas>
-		<div class = "map-container" id = "map-icons">
-		</div>
-		<div class = "map-container" id = "map-click-area">
-		</div>
-	</div>
-	
+<body>
+	<div id="gis-client">
+		<div class="map-container" id="map-container">
+			<img src="./map.png" class="map-container" id="map-image">
+			</img>
+			<canvas class="map-container" id="map-canvas">
+			</canvas>
+			<div class="map-container" id="map-icons">
+			</div>
+			<div class="map-container" id="MAP-CLICK-AREA">
+			</div>
 
-	<div >
-		
-		<button type="button" id = "admin-btn" class="btn btn-primary btn-sm pull-right admin-button" data-toggle="modal" data-target="#myModal" >
-				Админ			
-		</button>
-
-		<button type="button" id = "exit-admin-btn" class="btn btn-primary btn-sm pull-right admin-button"  >
-				Выйти			
-		</button>
-		 
-			  
-		<form id = "search-menu" action="javascript:">	
-			<div class = "search-menu form-row row">
-				<input class="form-control col-md-10 col-9" type="text" id = "search-row"/>
-				<input class="form-control col-md-2  col-3" type="submit" value="Искать" />
-			</div>
-		</form>
-	</div>
-	
-	<div>
-		<select class = "d-menu" id="point-menu" size = "3" >
-			<option id = "0"> Построить маршрут </option>
-			<option id = "1"> Что это у нас тут?)</option>
-			<option id = "2"> Добавить точку </option>
-		</select>
-	</div>
-	
-	<div class = "left-info" id = "left-info">	
-		<div class = "addresses-info" id = "addresses-info">
-		<h2>Адрес</h2>
-		</div>
-		<div class = "organizations-info" id = "organizations-info">
-		<h2>Список организаций</h2>
-		</div>
-		<div class = "way-info" id = "way-info">
-			<h2>Маршрут</h2>
-			<form>
-				<label> Откуда	</label>
-				<label class="form-control" id="way-info-first-point" type="text"> </label>
-				<label> Куда	</label>
-				<label class="form-control" id="way-info-second-point" type="text"> </label>
-				</br>
-				<!-- input class="form-control col-sm" type="submit" value="Построить" / -->			
-			</form>
-		</div>
-		<div class = "add-new-point-menu " id = "add-new-point-menu" >
-			<h2> Добавить новый участок маршрута</h2>
-			
-			<div class = ""> 
-				<label>Первая точка</label></br>
-				<div class = "col-6"> 
-					<label> X: </label>
-					<label class = "card card-body" id= "first-point-x" type="text"> </label>
-				</div>
-				<div class = "col-6"> 
-					<label> Y: </label>
-					<label class = "card card-body" id= "first-point-y" type="text" > </label>
-				</div>
-			</div>
-			
-			<div class = "">
-				<label>Вторая точка</label>
-				<div class = "col-6"> 
-					<label> X: </label>
-					<label class ="card card-body" id= "second-point-x" type="text"> </label>
-				</div>
-				<div class = "col-6"> 
-					<label> Y: </label>
-					<label class = "card card-body" id= "second-point-y" type="text"> </label>
-				</div>
-			</div>
-			<div class = "">
-				<div class = "col-12">
-					<label>Введите название улицы</label></br>
-					<input type="text" id = "new-point-street-name" class="form form-control"/>
-				</div>
-			</div>
-			<button class = "btn" id = "add-new-point-btn" > Добавить точку </button>
-		</div>
-		
-	</div>
-	
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				  </button>
-				  <h4 class="modal-title" id="myModalLabel">Авторизация</h4>
-				</div>
-				<div class="modal-body">
-				  	<div>
-						<label> Введите логин </label></br>
-						<input type = "text" id = "login-input" class = "form form-control"/>
-						<label> Введите пароль</label>
-						<input type = "password" id = "password-input" class = "form form-control"/>
+			<div class="map-container" id="map-admin-container" v-show="isActive">
+				<canvas class="map-container" id="map-admin-canvas">
+				</canvas>
+				<canvas class="map-container" id="map-admin-new-link-canvas">
+				</canvas>
+				<div class="map-container" id="map-admin-click-area" v-on:click="setNewPoint">
+					<div v-for="p in existPoints" class="exist-point" v-on:click="chooseLinkPoint(p)" v-bind:style="{ 'left' : p.x + 'px', 'top' : p.y + 'px' }">
+						<img src="./existPointIcon.png"> </img>
 					</div>
 				</div>
-				<div class="modal-footer">
-				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-				  <button type="button" class="btn btn-primary" id = "auth-btn">Авторизироваться</button>
-				</div>
-			  </div>
 			</div>
-		  </div>
+		</div>
+
+		<div class="btn-group float-right" role="group" aria-label="Basic example">
+			<button v-show="!isLogged" type="button" id="admin-btn" class="btn btn-primary btn-sm admin-button" data-toggle="modal" data-target="#myModal">
+				Админ
+			</button>
+
+			<button v-show="isLogged" type="button" id="start-edit-admin-btn" class="btn btn-primary btn-sm admin-button" v-on:click="toogleEdit">
+				Редактировать
+			</button>
+
+			<button v-show="isLogged" type="button" id="exit-admin-btn" class="btn btn-primary btn-sm admin-button" v-on:click="logout">
+				Выйти
+			</button>
+		</div>
+
+		<div>
+			<form id="search-menu" action="javascript:">
+				<div class="search-menu form-row row">
+					<input class="form-control col-md-10 col-9" type="text" id="search-row" />
+					<input class="form-control col-md-2  col-3" type="submit" value="Искать" />
+				</div>
+			</form>
+		</div>
+
+		<div>
+			<select class="d-menu" id="point-menu" size="3">
+				<option id="0"> Построить маршрут </option>
+				<option id="1"> Что это у нас тут?)</option>
+			</select>
+		</div>
+
+		<div class="left-info" id="left-info">
+			<div class="addresses-info" id="addresses-info">
+				<h2>Адрес</h2>
+			</div>
+			<div class="organizations-info" id="organizations-info">
+				<h2>Список организаций</h2>
+			</div>
+			<div class="way-info" id="way-info">
+				<h2>Маршрут</h2>
+
+				<label> Откуда </label>
+				<label class="form-control" id="way-info-first-point" type="text"> </label>
+				<label> Куда </label>
+				<label class="form-control" id="way-info-second-point" type="text"> </label>
+				</br>
+			</div>
+		</div>
+
+		<div class="left-info" id="left-info" v-show="isActive">
+			<div class="add-new-point-menu " id="add-new-point-menu">
+				<h2> Связать точки</h2>
+
+				<button class="btn btn-primary" v-on:click="setTool(2)" v-bind:active="curTool === 2">Существующие</button>
+				<button class="btn btn-primary" v-on:click="setTool(1)" v-bind:active="curTool === 1">Новая</button>
+
+				<div v-if="pointToLink1!==null">
+					<div class="form-row">
+						<label>Существующую точку</label>
+					</div>
+					<div class="form-row row">
+						<div class="form-group col">
+							<label> id: </label>
+							<label class="card card-body" type="text"> {{ pointToLink1.id}} </label>
+						</div>
+						<div class="form-group col">
+							<label> X: </label>
+							<label class="card card-body" type="text"> {{ pointToLink1.x}} </label>
+						</div>
+						<div class="form-group col">
+							<label> Y: </label>
+							<label class="card card-body" type="text"> {{ pointToLink1.y}}</label>
+						</div>
+					</div>
+				</div>
+
+				<div v-if="pointToLink2!==null">
+					<div class="form-row">
+						<label>Существующую точку</label>
+					</div>
+					<div class="form-row row">
+						<div class="form-group col">
+							<label> id: </label>
+							<label class="card card-body" type="text"> {{ pointToLink2.id}} </label>
+						</div>
+						<div class="form-group col">
+							<label> X: </label>
+							<label class="card card-body" type="text"> {{ pointToLink2.x}} </label>
+						</div>
+						<div class="form-group col">
+							<label> Y: </label>
+							<label class="card card-body" type="text"> {{ pointToLink2.y}}</label>
+						</div>
+					</div>
+				</div>
+
+				<div v-if="pointToAdd!==null">
+					<div class="form-row">
+						<label>Новую точку</label>
+					</div>
+					<div class="form-row row">
+						<div class="form-group col">
+							<label> id: </label>
+							<label class="card card-body" type="text"> {{ pointToAdd.id}} </label>
+						</div>
+						<div class="form-group col">
+							<label> X: </label>
+							<label class="card card-body" type="text"> {{ pointToAdd.x}} </label>
+						</div>
+						<div class="form-group col">
+							<label> Y: </label>
+							<label class="card card-body" type="text"> {{ pointToAdd.y}}</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>Введите название улицы</label>
+					</br>
+					<input type="text" id="new-point-street-name" class="form form-control" v-model="streetName" />
+				</div>
+				<button class="btn" id="add-new-point-btn" v-show="pointToLink1 !== null && (pointToLink2 !== null || pointToAdd !== null)" v-on:click="addLink">
+					Добавить точку
+				</button>
+				<button class="btn" v-show="curTool !== 0" v-on:click="setTool(0)">
+					Отмена
+				</button>
+			</div>
+		</div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Авторизация</h4>
+					</div>
+					<form v-on:submit.prevent="login">
+						<div class="modal-body">
+							<div>
+								<label> Введите логин </label>
+								</br>
+								<input type="text" id="login-input" class="form form-control" v-model="user.login" />
+								<label> Введите пароль</label>
+								<input type="password" id="password-input" class="form form-control" v-model="user.password" />
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+							<input type="submit" class="btn btn-primary" id="auth-btn" value="Авторизироваться" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY"
+	    crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
+	    crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	    crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<script src="./scripts.js"></script>
+</body>
 
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script>
-	
-		//Код, выполняющийся после загрузки страницы
-		//Осторожно, куча перемнных в глобальной области видимости
-		$(window).on('load', function(){
-			
-			
-			loggedUser = null;
-			loggedUserPassword = null;
-
-			//Адрес сервака, возможно, будет ненужным
-			//serverAddr = "http://192.168.88.27/api"
-			serverAddr = "http://192.168.88.151:443/api"
-			//serverAddr = "http://192.168.88.151/api"
-			//serverAddr = "http://25.62.221.106/api"
-			//serverAddr = "http://25.62.221.106/api"
-			//serverAddr = "http://80.211.190.22:443/api"
-			//serverAddr = "http://80.211.190.22:443/api"
-		
-			//Jquery - объект с картинкой карты
-			jq_mapImg = $("#map-image");	
-		
-		
-			//Холст поверх картинкы карты, чтоб рисовать на нём пути
-			canv = document.querySelector("canvas").getContext("2d");
-			canv.canvas.width = jq_mapImg.width();
-			canv.canvas.height = jq_mapImg.height();
-			
-			canv.strokeStyle = "blue";
-			canv.lineWidth = 5;
-
-			//Jquery - объект с дивом поверх холста с путями, чтоб ставить на него иконки
-			//И, возможно, всякии менюшки(но это не точно) 
-			jq_mapIconContainer = $("#map-icons");
-			jq_mapIconContainer.width( jq_mapImg.width());
-			jq_mapIconContainer.height( jq_mapImg.height());
-			
-			//Отлавливаем нажатия
-			jq_mapClickArea = $("#map-click-area");
-			jq_mapClickArea.width( jq_mapImg.width());
-			jq_mapClickArea.height( jq_mapImg.height());
-			//Вот тут
-			jq_mapClickArea.on("click", onMapClick);
-			
-			
-			//Контейнер с поисковой строкой
-			jq_searchMenuContainer = $("#search-menu");
-			jq_searchMenuContainer.on("submit", onSearchSubmit);
-			//Сама поисковая строка
-			jq_searchRow = jq_searchMenuContainer.find("#search-row");
-			
-			
-			//Контейнер с инфой о пути ( содержит две строки)
-			jq_wayInfo = $("#way-info");
-			
-			//Контейнер для записей об организацияхв точке
-			jq_organizationsInfo = $("#organizations-info");
-			
-			//Контейнер для списка адресов
-			jq_addressesInfo = $("#addresses-info");
-			
-			//Левая менюшка целиком
-			jq_leftMenu = $("#left-info");
-			hideLeftMenu();
-			
-			//Менюшка, появляющаяся при клике на карту
-			jq_pointMenu = $("#point-menu");
-			jq_pointMenu.hide();
-			jq_pointMenu.on("click", onPointMenuClick);
-			
-			jq_addPointMenu = $("#add-new-point-menu");
-			jq_addPointBtn = $("#add-new-point-btn");
-			
-			jq_addPointBtn.on("click", addPointToServerRequest );
-			jq_addPointBtn.hide();
-
-
-			jq_adminBtn = $("#admin-btn");
-
-			jq_authBtn = $("#auth-btn");
-			jq_authBtn.on("click", onAuthorizeBtn);
-
-			jq_exitAdminBtn = $("#exit-admin-btn");
-			jq_exitAdminBtn.hide();
-			jq_exitAdminBtn.on("click", onExitAdminBtn );
-
-
-			jq_addNewPointBtn = $("#point-menu").children("#2");
-			jq_addNewPointBtn.hide();
-			//Последний клик по карте
-			lastClickXY = [-1, -1];
-
-
-
-			wayPoints = [];
-		});
-		
-			
-		
-		///////////////////////////////////////////////////////////////
-		////////////........Окошко со списком адресов...........///////
-		///////////////////////////////////////////////////////////////
-		
-		function addOneAddresseInfo( strAddr){
-			var addrElem = $(" \
-				<div class = 'one-addresse-info card card-body' >" + 
-					strAddr + 
-				"</div> \
-			");
-			
-			jq_addressesInfo.append(addrElem);
-		};
-		
-		function clearAddressesInfo(){
-			jq_addressesInfo.find(".one-addresse-info").remove();
-		}
-		
-
-		///////////////////////////////////////////////////////////////
-		////////////........Окошко со списком организаций.......///////
-		///////////////////////////////////////////////////////////////
-		
-		
-		//Добавить в список организаций (менюшка слева) Ещё одна строчка
-		function addOneOrganizationInfo( organization ){
-			var orgInfoElement = $(" \
-					<div class = 'one-organization-info card card-body'> \
-						" + organization.name + " <br> \
-						" + organization.address + " <br> \
-					</div> \
-				");
-
-			orgInfoElement.prop("coordX", organization.point[0]);
-			orgInfoElement.prop("coordY", organization.point[1]);			
-			orgInfoElement.on("click", onOrganizationClick);
-			jq_organizationsInfo.append(orgInfoElement);
-		};
-		
-		function onOrganizationClick(event){
-			var xy = [];
-			xy[0] = event.currentTarget.coordX ;
-			xy[1] = event.currentTarget.coordY ;
-
-			$(".red-point").remove();
-			addRedPointIcon(xy);
-			
-			//xy[0] +=  jq_mapIconContainer.offset().left;
-			//xy[1] += jq_mapIconContainer.offset().top;
-			scrollTo(xy[0], xy[1]);
-		}
-
-		function clearOrganizationsInfo(){
-			jq_organizationsInfo.find(".one-organization-info").remove();
-		};
-		
-		function refillOrganizationsInfo(organizations){
-			clearOrganizationsInfo();
-			for (var i = 0; i < organizations.length; i++){
-				addOneOrganizationInfo(organizations[i]);
-			}
-		}
-
-		///////////////////////////////////////////////////////
-		///////.......Окошко с инфой о маршруте ....///////////
-		///////////////////////////////////////////////////////
-		function setFirstWayPointToWayInfo(strLoc){
-			$("#way-info-first-point").text(strLoc);
-		};
-		function setSecondWayPointToWayInfo(strLoc){
-			$("#way-info-second-point").text(strLoc);
-		};
-		
-		function getFirstWayPointToWayInfo(strLoc){
-			return $("#way-info-first-point").text();
-		};
-		function getSecondWayPointToWayInfo(strLoc){
-			return $("#way-info-second-point").text();
-		};
-		
-
-		///////////////////////////////////////////////////////
-		///////........Левая менюшка в общем........///////////
-		///////////////////////////////////////////////////////
-		
-		function showAddressesInfo(){
-		
-			jq_wayInfo.hide();
-			jq_organizationsInfo.hide();
-			jq_addressesInfo.show();
-			jq_leftMenu.show();
-			jq_addPointMenu.hide();
-		}
-		
-		
-		function showOrganizationsInfo(){
-		
-			jq_wayInfo.hide();
-			jq_addressesInfo.hide();
-			jq_organizationsInfo.show();
-			jq_leftMenu.show();
-			jq_addPointMenu.hide();
-		}
-		
-		
-		function showWayInfo(){
-		
-			jq_organizationsInfo.hide();
-			jq_addressesInfo.hide();
-			jq_wayInfo.show();
-			jq_leftMenu.show();
-			jq_addPointMenu.hide();
-		}
-		
-		
-		function showAddPointMenu(){
-		
-			jq_organizationsInfo.hide();
-			jq_addressesInfo.hide();
-			jq_wayInfo.hide();
-			jq_leftMenu.show();
-			jq_addPointMenu.show();
-		}
-		
-		function hideLeftMenu(){
-			jq_leftMenu.hide();
-		}
-		
-		///////////////////////////////////////////////////////
-		///////...........Строка поиска.............///////////
-		///////////////////////////////////////////////////////
-		
-		function onSearchSubmit(event){
-			//alert("Попробуйте сначала найти себя");
-			clearMapCanvas();
-			serverRequestSearchLoc();
-			hidePointMenu();
-		}
-		
-		// Это запрос на сервак 
-		function serverRequestSearchLoc(){
-			var searchStr = jq_searchRow.val();
-			let requestURL = "GetResult";
-			$.get(
-					serverAddr,
-					{
-						method: requestURL,
-						request: searchStr
-					},
-					onServerSearchAnswer,
-					"Json"
-				);
-		};
-
-		//Это обработка ответа
-		function onServerSearchAnswer(data, textStatus, jqXHR){
-			let points = [];
-			points = points.concat( data.points);
-			for (let i = 0; i < data.organizations.length; i++ ){
-				points = points.concat( [data.organizations[i].point]);
-			}
-
-			removeAllPointIcons();
-			let minX, minY, maxX, maxY;
-			minX = minY = 10000000000;
-			maxX = maxY = 0;
-			for ( let i = 0; i < points.length; i++){
-				addBlackPointIcon( points[i]); //Фигачим точечки
-				
-				maxX = Math.max(maxX, points[i][0]);
-				minX = Math.min(minX, points[i][0]);
-				maxY = Math.max(maxY, points[i][1]);
-				minY = Math.min(minY, points[i][1]);
-			}
-			
-			centrX = (minX + maxX) / 2 ; //+ jq_mapIconContainer.offset().left;
-			centrY = (minY + maxY) / 2 ; //+ jq_mapIconContainer.offset().top;
-			
-			//TODO тестыыыыыы
-			scrollTo(centrX, centrY);
-
-			var orgs = data.organizations;
-			if (orgs.length > 0) {
-				showOrganizationsInfo();
-			}
-			else if (data.address) {
-				showAddressesInfo();
-				clearAddressesInfo();
-				addOneAddresseInfo(data.address);
-			}
-			refillOrganizationsInfo(orgs);
-		}
-		
-		///////////////////////////////////////////////////////
-		///////...............Карта............ ....///////////
-		///////////////////////////////////////////////////////
-		
-		//Что произойдёт при нажатии на карту
-		function onMapClick( event){
-
-			if ( event.target.parentElement.id !== event.currentTarget.id ){
-				var xy = getClickCoords( event);
-				//alert( xy);
-				lastClickXY = xy;
-				removeNotWayPointIcons();
-				addRedPointIcon(xy);
-				setPointMenu(xy);
-			}
-		};
-		
-		//Узнать адрес точки (по факту, ещё и список организаций, 
-		//но данную штуку планируется вызывать из "построить маршрут", куда она и запишет адрес)
-		function whatAddressThere(xy){
-			var x = xy[0];
-			var y = xy[1];
-			
-			var requestURL = "GetAddresse"; 
-			$.get(
-					serverAddr,
-					{
-						method: requestURL,
-						coordinateX: xy[0],
-						coordinateY: xy[1]
-					}, 					
-					onWhatAddressThereAnswer,
-					"Json"
-			);
-		};
-
-
-		//Обработка ответа
-		function onWhatAddressThereAnswer(data, textStatus, jqXHR){
-			//var addr = data.object.address ? data.object.address : "";
-			var addr = data.address;
-			if ( getFirstWayPointToWayInfo() == null || getFirstWayPointToWayInfo() == ""){
-				setFirstWayPointToWayInfo(addr ==="" || addr === null ? "------" : addr);
-			} else if ( getSecondWayPointToWayInfo() == null || getSecondWayPointToWayInfo() == ""){
-				setSecondWayPointToWayInfo(addr ==="" || addr === null ? "------" : addr);
-				getWayRequest();
-			} else {
-				setFirstWayPointToWayInfo(addr ==="" || addr === null ? "------" : addr);
-				setSecondWayPointToWayInfo("");
-				clearMapCanvas();
-			}
-		}
-		
-
-		
-		//По факту ещё и адрес, но это бессмысленно, его в списке организаций посмотрим
-		function whatOrganizationsThere(xy){
-			var x = xy[0];
-			var y = xy[1];
-			
-			var requestURL = "GetAddresse"; 
-			$.get(
-					serverAddr,
-					{
-						method: requestURL,
-						coordinateX: xy[0],
-						coordinateY: xy[1]
-					}, 					
-					onWhatOrganizationsThere,
-					"Json"
-			);
-		};
-
-		function onWhatOrganizationsThere(data, textStatus, jqXHR){
-			var organizations = data.organizations;
-			if (organizations.length >= 1){
-				showOrganizationsInfo();
-				refillOrganizationsInfo(organizations);
-			}else {
-				const addr = data.address;
-				clearAddressesInfo();
-				addOneAddresseInfo(addr);
-				showAddressesInfo();
-			}
-			
-		}
-
-
-		function getWayRequest(){
-			var requestURL = "GetRoute";
-			
-			pointsOnMap = getWayPointIcons();
-			
-			$.get(
-				serverAddr,
-				{
-					method: requestURL,
-					coordinateX1 : pointsOnMap[0].coordX,
-					coordinateY1 : pointsOnMap[0].coordY,
-					coordinateX2 : pointsOnMap[1].coordX,
-					coordinateY2 : pointsOnMap[1].coordY,
-				},
-				onGetWay,
-				"Json"
-			);
-		}
-
-		function onGetWay(data, textStatus, jqXHR){
-			let points = data.points;
-			drawWay(points);
-		}
-		//Получаем координаты точки на которую кликнули
-		//Координаты относительно начала документа
-		function getClickCoords(event){
-			var x = event.offsetX;
-			var y = event.offsetY;
-			var xy = [x,y];
-			return xy;
-		};
-		
-		//Нарисовать путь
-		// way - массив точек
-		// точка - массив из двух элементов, [0] - x, [1] - y
-		function drawWay( way){
-			canv.beginPath();
-			canv.moveTo( way[0][0], way[0][1] );
-			for ( var i = 1; i < way.length; i++){
-				canv.lineTo( way[i][0], way[i][1] );
-			};
-			canv.stroke();
-		};
-		
-		//Очистить карту от путей
-		function clearMapCanvas(){
-			canv.clearRect(0, 0, canv.canvas.width, canv.canvas.height);
-		};
-		
-		
-		//Открыть менюшку при нажатии на кнопку
-		function setPointMenu(xy){
-			if ( loggedUser != null){
-				jq_pointMenu.attr("size", 3);
-				jq_addNewPointBtn.show();
-			} else {
-				jq_pointMenu.attr("size", 2);
-				jq_addNewPointBtn.hide();
-			}
-			var _x = xy[0] + jq_mapIconContainer.offset().left;	
-			var _y = xy[1] + jq_mapIconContainer.offset().top;
-			
-			jq_pointMenu.offset({top:_y, left:_x});
-			jq_pointMenu.show();
-		}
-		
-		function hidePointMenu(){
-			
-			jq_pointMenu.offset({top:0, left:0});
-			jq_pointMenu.hide();
-		}
-		
-		function onPointMenuClick(event){
-			selectedIndex = event.currentTarget.selectedIndex;
-			if ( selectedIndex === 0){
-				
-				showWayInfo();
-				if( $(".way-point-icon").length >= 2)
-					removeWayPointIcons();
-
-				convertPointToWayPoint( $(".point-icon"));
-				
-				//let point = getRedPointIcons()[0];
-				whatAddressThere(lastClickXY);
-			
-				
-				clearMapCanvas();
-				clearAdminPoints();
-
-			} else if (selectedIndex === 1){
-
-				removeWayPointIcons();
-				setFirstWayPointToWayInfo("");
-				setSecondWayPointToWayInfo("");				
-
-				let point = getRedPointIcons()[0];
-
-				whatOrganizationsThere(lastClickXY);
-				
-				clearMapCanvas();
-				clearAdminPoints();
-			} else if ( selectedIndex === 2){
-				clearMapCanvas();
-				clearAdminPoints();
-				setFirstWayPointToWayInfo("");
-				setSecondWayPointToWayInfo("");
-				onChoseAddNewPoint();
-			}
-			hidePointMenu();
-		}
-
-		//Поставить точку
-		function addPointIcon(iconSource, xy){
-			var iconElement = $(" \
-				<img src= \'" + iconSource  + "\' class='point-icon' /> \
-			");
-			jq_mapIconContainer.append(iconElement);
-			
-			iconElement.height(32);
-			iconElement.width(16);
-			iconElement.prop( "coordX", xy[0]);
-			iconElement.prop( "coordY", xy[1]);
-			
-			var _x = xy[0] + jq_mapIconContainer.offset().left - iconElement.width() / 2;	
-			var _y = xy[1] + jq_mapIconContainer.offset().top - iconElement.height();
-			iconElement.offset({top:_y, left:_x});
-			
-			iconElement.css("position");
-			return iconElement;
-		};
-		
-		function getPointIcons(){
-			return $(".point-icon");
-		}
-
-		
-		function getRedPointIcons(){
-			return $(".red-point");
-		}
-
-		
-		
-		function addRedPointIcon(xy){
-			var redIconSource = "./redPointIcon.png";
-			var pointElem = addPointIcon(redIconSource,xy);
-			pointElem.addClass("red-point");
-			return pointElem;
-		};
-		
-		function addBlackPointIcon(xy){
-			var blackIconSource = "./blackPointIcon.png";
-			var pointElem = addPointIcon(blackIconSource,xy);
-			pointElem.addClass("black-point");
-			return pointElem;
-		};
-		
-		
-		
-		function convertPointToWayPoint(jq_point){
-
-			jq_point.removeClass("point-icon");
-			jq_point.addClass("way-point-icon");
-			
-		}
-
-		function getWayPointIcons(){
-			return $(".way-point-icon");
-		}
-
-		function removeAllPointIcons(){
-			removeNotWayPointIcons();
-			removeWayPointIcons();
-		}
-
-		function removeNotWayPointIcons(){
-			jq_mapIconContainer.find(".point-icon").remove();
-		};
-
-		function removeWayPointIcons(){
-			
-			var jq_notWayPoint = jq_mapIconContainer.find(".point-icon");
-			var notWayPointOffsets = jq_notWayPoint.offset(); //Костыль, иначе - почему-то съезжают
-			jq_mapIconContainer.find(".way-point-icon").remove();
-			jq_notWayPoint.offset( notWayPointOffsets);
-		};		
-
-
-		/////////////////////////////////////////
-		///////////....Админика..////////////////
-		/////////////////////////////////////////
-		
-		//При выборе меню "добавить точку"
-		function onChoseAddNewPoint(){
-			clearExistPoints();
-			$("#first-point-x").val(lastClickXY[0]);
-			$("#first-point-x").text(lastClickXY[0]);
-			$("#first-point-y").val(lastClickXY[1]);
-			$("#first-point-y").text(lastClickXY[1]);
-			showAddPointMenu();
-			showExistPoints();
-			addNewPoint();
-		}
-
-		function showExistPoints(){
-			clearMapCanvas();
-			removeAllPointIcons();
-			getExistPointsRequest();
-			
-		}
-
-		function getExistPointsRequest(){
-			let requestURL = "getAllWayPoints";
-			$.get(
-				serverAddr,
-				{
-					method: requestURL,
-				},
-				onGetAllWayPoints,
-				"Json"
-			);
-		}
-
-		function onGetAllWayPoints(data){
-			let points = data.points;
-			for ( let i = 0; i < points.length; i++){
-				addExistPoint(points[i]);
-			}
-
-		}
-
-		function addNewPoint(){
-			let xy = lastClickXY;
-			$('.new-point-icon').remove();
-			let pointPath = "./newPointIcon.png";
-			let iconElement = $(" \
-				<img src= \'" + pointPath + "\ ' class='new-point-icon point-icon' /> \
-			");
-			
-			//let x = xy[0] + jq_mapIconContainer.offset().left - iconElement.width() / 2;	
-			//let y = xy[1] + jq_mapIconContainer.offset().top - iconElement.height() / 2;
-		
-
-			jq_mapIconContainer.append(iconElement);
-			//iconElement.offset({top:y, left:x});
-			
-			iconElement.height(24);
-			iconElement.width(24);
-			
-			let x = xy[0] - iconElement.width() / 2;	
-			let y = xy[1] - iconElement.height() / 2;
-			
-			iconElement.css({position : "absolute"});
-			iconElement.css( {left : x, top : y});
-			iconElement.prop( "coordX", xy[0]);
-			iconElement.prop( "coordY", xy[1]);
-
-		}
-
-		function addExistPoint(point){
-			let xy = point.xy;
-			let id = 0;
-			id = point.id;
-			
-
-			
-			let pointPath = "./existPointIcon.png";
-
-			let iconElement = $(" \
-				<img src= \'" + pointPath + "\' class='exist-point-icon point-icon' /> \
-			");
-
-
-
-			//let x = xy[0] + jq_mapClickArea.offset().left - iconElement.width() / 2;	
-			//let y = xy[1] + jq_mapClickArea.offset().top - iconElement.height() /  2;
-			//let x = xy[0] + iconElement.width() / 2;	
-			//let y = xy[1] + iconElement.height() /  2;
-			//let x = xy[0] ;	
-			//let y = xy[1] ;
-
-			jq_mapClickArea.append(iconElement);
-			iconElement.height(16);
-			iconElement.width(16);
-			
-			let x = xy[0] - iconElement.width() / 2;	
-			let y = xy[1] - iconElement.height() /  2;
-			
-			
-			iconElement.css({position : "absolute"});
-			iconElement.css( {left : x, top : y});
-			iconElement.prop( "coordX", xy[0]);
-			iconElement.prop( "coordY", xy[1]);
-			iconElement.prop( "pointId", id);
-			iconElement.on('click', onExistPointClick);
-
-		}
-
-		
-
-		function clearAdminPoints(){
-			
-			$('.new-point-icon').remove();
-			$('.exist-point-icon').remove();
-		}
-
-		function clearExistPoints(){
-			$('.exist-point-icon').remove();
-		}
-
-		function onExistPointClick(e){
-
-
-
-			let xy = [ e.target.coordX, e.target.coordY ];
-
-			$('#second-point-x').val( xy[0]);
-			$('#second-point-x').text( xy[0]);
-			$('#second-point-y').val( xy[1]);
-			$('#second-point-y').text( xy[1]);
-
-
-			jq_addPointBtn.prop("oldId", e.target.pointId );
-			jq_addPointBtn.show();
-		}
-
-		function addPointToServerRequest(){
-
-			jq_addPointBtn.hide();
-			
-			let requestUrl = "addNewPoint";
-			let streetName = $("#new-point-street-name").val();
-			let oldX = $("#second-point-x").val();
-			let oldY = $("#second-point-y").val();
-			let newX = $("#first-point-x").val();
-			let newY = $("#first-point-y").val();
-			
-			let pointId = jq_addPointBtn.prop("oldId")[0];
-			$.get(
-				serverAddr,
-					{
-						method: requestUrl,
-						newX : newX,
-						newY : newY,
-						streetName : streetName,
-						oldId : pointId,
-						login : loggedUser,
-						password : loggedUserPassword
-						//oldX : oldX,
-						//oldY : oldY
-					}, 					
-					function(data){
-						$('#second-point-y').val("");
-						$('#second-point-y').text("");
-						$('#second-point-x').val("");
-						$('#second-point-x').text("");
-						$('#first-point-y').val("");
-						$('#first-point-y').text("");
-						$('#first-point-x').val("");
-						$('#first-point-x').text("");
-						jq_addPointBtn.prop("oldId", -1);
-						hideLeftMenu();
-						alert('Точка добавлена');
-						clearAdminPoints();
-					},
-					"Json"
-			);
-			let stop = 2;
-		}
-
-
-
-		//////////////////////////////////////////
-		//////////////Авторизация/////////////////
-		//////////////////////////////////////////
-
-		function onAuthorizeBtn(){
-			let login = $("#login-input").val();
-			let password = $("#password-input").val();
-			let method = "Authorization";
-
-			$.get(serverAddr, 
-			{
-				method : method,
-				password : password,
-				login : login
-			}, 
-			function (data)
-			{
-				data = JSON.parse(data);
-				let isAuth = data.isAuth;
-				if ( isAuth === true ){
-					loggedUser = login;
-					loggedUserPassword = password;
-					jq_adminBtn.hide();
-					jq_exitAdminBtn.show();
-					alert("Авторизация прошла успешно");
-					$('#myModal').modal('hide');
-				} else {
-					alert("Кажется, у вас ошибочка");
-				}
-			})
-
-		}
-
-
-		function onExitAdminBtn(){
-			loggedUser = null;
-			jq_adminBtn.show();
-			jq_exitAdminBtn.hide();
-		}
-
-		///////////////////////////////////////////
-		/////////..Работа с экраном?///////////////
-		///////////////////////////////////////////
-		
-		function scrollTo(x,y){
-			
-			
-			// анимируем скроллинг к элементу centerPoint
-			$('html, body').animate(
-				{ 
-					//scrollTop: centerPoint.offset().top, 	//Позиция по вертикали
-					//scrollLeft: centerPoint.offset().left 
-					scrollTop: y, 	//Позиция по вертикали
-					scrollLeft: x //Позиция по горизонтали
-				}, 
-				500										//Скорость
-			); 
-		};
-		
-		
-		
-	</script>
-	
-  </body>
 </html>
-
