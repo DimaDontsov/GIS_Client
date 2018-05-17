@@ -105,10 +105,10 @@
 			</canvas>
 			<div class="map-container" id="map-icons">
 			</div>
-			<div class="map-container" id="MAP-CLICK-AREA">
+			<div class="map-container" id="map-click-area">
 			</div>
 
-			<div class="map-container" id="map-admin-container" v-show="isActive">
+			<div class="map-container" id="map-admin-container" v-if="isActive">
 				<canvas class="map-container" id="map-admin-canvas">
 				</canvas>
 				<canvas class="map-container" id="map-admin-new-link-canvas">
@@ -122,6 +122,9 @@
 		</div>
 
 		<div class="btn-group float-right" role="group" aria-label="Basic example">
+			<button  type="button" class="btn btn-primary btn-sm admin-button" data-toggle="modal" data-target="#server-addr-modal">
+				Настройки
+			</button>
 			<button v-show="!isLogged" type="button" id="admin-btn" class="btn btn-primary btn-sm admin-button" data-toggle="modal" data-target="#myModal">
 				Админ
 			</button>
@@ -276,6 +279,27 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="server-addr-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" >Сменить адрес сервера</h4>
+						</div>
+							<div class="modal-body">
+								<div>
+									<label> Ip </label>
+									</br>
+									<input type="text" class="form form-control" v-model="serveraddr" />				
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Готово</button>
+							</div>
+						
+					</div>
+				</div>
+			</div>
+
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY"
