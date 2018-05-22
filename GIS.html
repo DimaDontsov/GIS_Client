@@ -101,27 +101,29 @@
 		<div class="map-container" id="map-container">
 			<img src="./map.png" class="map-container" id="map-image">
 			</img>
-			<canvas class="map-container" id="map-canvas">
-			</canvas>
-			<div class="map-container" id="map-icons">
+			<div class = "map-container" v-show="!isActive" >
+				<canvas class="map-container" id="map-canvas">
+				</canvas>
+				<div class="map-container" id="map-icons">
+				</div>
+				<div class="map-container" id="map-click-area">
+				</div>
 			</div>
-			<div class="map-container" id="map-click-area">
-			</div>
-
 			<div class="map-container" id="map-admin-container" v-if="isActive">
 				<canvas class="map-container" id="map-admin-canvas">
 				</canvas>
 				<canvas class="map-container" id="map-admin-new-link-canvas">
 				</canvas>
 				<div class="map-container" id="map-admin-click-area" v-on:click="setNewPoint">
-					<div v-for="p in existPoints" class="exist-point" v-on:click="chooseLinkPoint(p)" v-bind:style="{ 'left' : p.x + 'px', 'top' : p.y + 'px' }">
+					<div v-for="p in existPoints" class="exist-point" v-on:click="chooseLinkPoint(p)" v-bind:style="{ 'left' : p.x - 12  + 'px', 'top' : p.y - 12 + 'px' }">
 						<img src="./existPointIcon.png"> </img>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="btn-group float-right" role="group" aria-label="Basic example">
+		<!--<div class="btn-group float-right" role="group" aria-label="Basic example"> -->
+		<div class="btn-group admin-button" role="group" aria-label="Basic example">
 			<button  type="button" class="btn btn-primary btn-sm admin-button" data-toggle="modal" data-target="#server-addr-modal">
 				Настройки
 			</button>
@@ -245,8 +247,8 @@
 					<input type="text" id="new-point-street-name" class="form form-control" v-model="streetName" />
 				</div>
 				<button class="btn" id="add-new-point-btn" v-show="pointToLink1 !== null && (pointToLink2 !== null || pointToAdd !== null)" v-on:click="addLink">
-					Добавить точку
-				</button>
+					{{ curTool === 1 ? "Добавить точку" : curTool === 2 ? "Добавить связь" : "---"  }}
+				</button> 
 				<button class="btn" v-show="curTool !== 0" v-on:click="setTool(0)">
 					Отмена
 				</button>
@@ -261,7 +263,7 @@
 						</button>
 						<h4 class="modal-title" id="myModalLabel">Авторизация</h4>
 					</div>
-					<form v-on:submit.prevent="login">
+					<form v-on:submit.prevent=" regOrLog ">
 						<div class="modal-body">
 							<div>
 								<label> Введите логин </label>
@@ -269,11 +271,17 @@
 								<input type="text" id="login-input" class="form form-control" v-model="user.login" />
 								<label> Введите пароль</label>
 								<input type="password" id="password-input" class="form form-control" v-model="user.password" />
+								<div v-show="isRegistration">
+									<label> Повторите пароль</label>
+									<input type="password" id="password-input" class="form form-control" v-model="user.repeatPass" />
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
+							<a href="#" v-on:click="isRegistration = !isRegistration"> {{ isRegistration ?"Авторизация" :"Регистрация" }} </a>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-							<input type="submit" class="btn btn-primary" id="auth-btn" value="Авторизироваться" />
+							<input v-show="!isRegistration" type="submit" class="btn btn-primary" id="auth-btn" value="Авторизироваться" />
+							<input v-show="isRegistration" type="submit" class="btn btn-primary" id="reg-btn" value="Регистрироваться" />
 						</div>
 					</form>
 				</div>

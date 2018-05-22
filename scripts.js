@@ -18,7 +18,8 @@ adminMode = new Vue ({
         isLogged : false,
         user : {
             password : "",
-            login : ""
+            login : "",
+            repeatPass: "",
         },
         isActive : false,
         existPoints : [],
@@ -30,7 +31,8 @@ adminMode = new Vue ({
         tools : Object.freeze({NONE : 0, ADD_POINT : 1, LINK_POINTS : 2}),
         curTool : 0,
         canv : null,
-        newLinkCanv : null
+        newLinkCanv : null,
+        isRegistration : false
     },
     
     methods : {
@@ -71,10 +73,61 @@ adminMode = new Vue ({
                 }
             })
         },
+
+        registration : function(){
+            var t = this;
+            let login = t.user.login;
+            let password =t.user.password;
+            let method = "Registration";
+            let repPas = t.user.repeatPass;
+            if ( repPas !== password){
+                alert("Пароль не совпал");
+                return;
+            }
+            if ( login === "" || password === ""){
+                alert("Введите логин и пароль")
+            }
+            $.get(serverAddr, 
+                {
+                    method : method,
+                    password : password,
+                    login : login
+                }, 
+                function (data)
+                {
+                    data = JSON.parse(data);
+                    let isAuth = data.success;
+                    if ( isAuth === true ){
+                        t.isLogged = true;
+                        t.isRegistration = false;
+                        t.user.repeatPass = "";
+                        localStorage.setItem(clientId+"login", t.user.login);
+                        localStorage.setItem(clientId+"password", t.user.password);
+                        localStorage.setItem(clientId+"isLogged", t.isLogged);
+                        $('#myModal').modal('hide');
+                    } else {
+                        t.isLogged = false;
+                        alert("Ошибочка! Логин занят ( скорее всего, я не уверен, я это не кодил) ");
+                    }
+                }
+            )
+        },
+        regOrLog : function(){
+            if ( this.isRegistration === false) {
+                this.login();
+            } else { 
+                this.registration();
+            }
+        },
         logout : function(){
+            var t = this;
             this.isLogged = false;
-            localStorage.setItem(clientId+"login", null);
-            localStorage.setItem(clientId+"password", null);
+            this.isActive = false;
+            localStorage.setItem(clientId+"login", "");
+            localStorage.setItem(clientId+"password", "");
+            localStorage.setItem(clientId+"isLogged", t.isLogged);
+            t.user.login = "";
+            t.user.password = "";
         },
         startEdit : function (){
             this.isActive = true;
@@ -142,15 +195,16 @@ adminMode = new Vue ({
                     newX: t.pointToAdd.x, 
                     newY: t.pointToAdd.y, 
                     streetName: t.streetName, 
-                    oldId: t.pointToLink1.id, 
+                    oldId: t.pointToLink1.id[0], 
                     login: t.user.login, 
                     password: t.user.password 
                 }, function(data) {
                     if ( data.status !=="Error"){
                         t.pointToAdd = null;
                         t.refreshPoints();
+                        t.refreshWaySegments();
                     } else {
-                        allert("Простите, сервер перестал нас слушаться. Он решил, что он умнее ;(")
+                        alert("Простите, сервер перестал нас слушаться. Он решил, что он умнее ;(")
                     }
                 }, 
                 "Json");
@@ -158,16 +212,18 @@ adminMode = new Vue ({
                 let requestUrl = "addNewLink";
                 $.get(serverAddr, {
                     method: requestUrl,
-                    point1: t.pointToLink1.id,
-                    point2: t.pointToLink2.id,
+                    point1: t.pointToLink1.id[0],
+                    point2: t.pointToLink2.id[0],
                     streetName: t.streetName,
                     login: t.user.login,
                     password: t.user.password
                 }, function (data) {
                     if (data.status !== "Error") {
                         t.pointToLink1 = null;
+                        t.refreshPoints();
+                        t.refreshWaySegments();
                     } else {
-                        allert("Простите, сервер перестал нас слушаться. Он решил, что он умнее ;(");
+                        alert("Простите, сервер перестал нас слушаться. Он решил, что он умнее ;(");
                     }
                 });
             }
@@ -200,6 +256,7 @@ adminMode = new Vue ({
                 method: requestURL
             },
             function(data) {
+                data = JSON.parse(data);
                 if (data.segments){
                     for (let s of data.segments){
                         t.addExistWaySegment( new waySegment(s.p1, s.p2));
@@ -230,6 +287,7 @@ adminMode = new Vue ({
             if (this.isActive){
                 this.refreshPoints();
                 this.refreshWaySegments();
+                hideLeftMenu();
             } else {
                 //let points = [];
                 //t.existPoints = points;
@@ -268,7 +326,7 @@ adminMode = new Vue ({
         
         this.user.login = localStorage.getItem(clientId+"login");
         this.user.password = localStorage.getItem(clientId+"password");
-        this.isLogged = localStorage.getItem(clientId+"isLogged");
+        this.isLogged = localStorage.getItem(clientId+"isLogged") === "false" ? false : true;
 
         this.canv = $("#map-admin-canvas")[0].getContext("2d");
         this.newLinkCanv = $("#map-admin-new-link-canvas")[0].getContext("2d");
